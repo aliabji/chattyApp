@@ -34,12 +34,17 @@ class App extends Component {
     }, 3000);
   }
 
-  myCallback = (evt) => {
-    if (evt.key === 'Enter') {
-      this.setState({
-        inputValue: evt.target.value
-      })
-    }
+  userChanger = (change) => {
+    this.setState({ currentUser: {name: change}})
+  }
+
+  addNewMsg = (msg) => {
+    let newMessageInfo = [...this.state.messages,{
+      id: Date.now(),
+      username: this.state.currentUser.name,
+      content: msg
+    }];
+    this.setState({messages: newMessageInfo});
   }
 
   render() {
@@ -54,7 +59,7 @@ class App extends Component {
           <MessageList meat={this.state.messages} />
         </main>
         <footer>
-          <ChatBar ali={this.state.currentUser} handleKeyPress/>
+          <ChatBar ali={this.state.currentUser} bubble={this.addNewMsg} userBubble={this.userChanger}/>
         </footer>
       </div>
     );
