@@ -5,20 +5,32 @@ class MessageList extends Component {
   constructor(props) {
     super(props)
   }
+
   render() {
     console.log("Rendering <MessageList/>")
-    const inheritProps = this.props.meat
-    const submissions = inheritProps.map((message) => 
+
+    const inheritMessageProps = this.props.meat
+    const inheritNotificationProps = this.props.newNotify
+
+    const submissions = inheritMessageProps.map((message) =>
       <div className="message" key={message.id}>
         <span className="message-username">{message.username}</span>
         <span className="message-content">{message.content}</span>
       </div>
     )
+
+    // const notifications = inheritNotificationProps.map((message) =>
+    //   <div className="message">
+    //     <div className="message system">
+    //       {message.oldUser} changed their username to {message.newUser}
+    //       </div>
+    //   </div>
+    // )
+
     return (
       <div>
-          {submissions}
+        {submissions}
 
-        {/* <Message /> */}
       </div>
     )
   }

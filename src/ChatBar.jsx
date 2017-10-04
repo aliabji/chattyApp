@@ -11,7 +11,7 @@ class ChatBar extends Component {
   }
 
   handleUserChange = (evt) => {
-    console.log(this)
+    if (evt.key === 'Enter')
     this.props.userBubble(evt.target.value)
   }
 
@@ -24,7 +24,7 @@ class ChatBar extends Component {
   render() {
     return (
       <div className="chatbar">
-        <input className="chatbar-username" placeholder={this.props.ali.name} onChange={this.handleUserChange} />
+        <input className="chatbar-username" placeholder={this.props.ali.name + ", press ENTER to change Username"} onKeyPress={this.handleUserChange} />
         <input className="chatbar-message" placeholder="Type a message and hit ENTER" onKeyPress={this.handleKeyPress} />
       </div>
     )
