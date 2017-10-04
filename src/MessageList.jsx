@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Message from './message.jsx'
 
 class MessageList extends Component {
@@ -18,10 +18,10 @@ class MessageList extends Component {
       <div>
           {submissions}
 
-        <Message />
+        {/* <Message /> */}
       </div>
     )
   }
 }
 
-export default MessageList;
+export default MessageList

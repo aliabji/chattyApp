@@ -24,8 +24,8 @@ class ChatBar extends Component {
   render() {
     return (
       <div className="chatbar">
-        <input className="chatbar-username"  placeholder={this.props.ali.name} onChange={this.handleUserChange}/>
-        <input className="chatbar-message" placeholder="Type a message and hit ENTER" onKeyPress={this.handleKeyPress}/>
+        <input className="chatbar-username" placeholder={this.props.ali.name} onChange={this.handleUserChange} />
+        <input className="chatbar-message" placeholder="Type a message and hit ENTER" onKeyPress={this.handleKeyPress} />
       </div>
     )
   }
