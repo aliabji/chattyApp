@@ -8,7 +8,8 @@ class App extends Component {
     super(props)
     this.state = {
       currentUser: { name: "Bob" }, // optional. if currentUser is not defined, it means the user is Anonymous
-      messages: []
+      messages: [],
+      size: 0
     }
   }
   componentDidMount() {
@@ -46,7 +47,11 @@ class App extends Component {
           }]
           this.setState({ messages: userNotification})
           break
-      }
+        case "incomingSize":
+        console.log("SIIIIIIIIIZZZZZEEEEEE", incomingMsg.size)
+          this.setState({ size: incomingMsg.size })
+          break
+      } 
     }
   }
 
@@ -78,7 +83,7 @@ class App extends Component {
       <div>
         <nav className="navbar">
           <a href="/" className="navbar-brand">Chatty</a>
-          <h5>users online</h5>
+          <h5>{this.state.size} users online</h5>
         </nav>
         <main className="messages">
           <MessageList msgs={this.state.messages} />
