@@ -8,8 +8,7 @@ class App extends Component {
     super(props)
     this.state = {
       currentUser: { name: "Bob" }, // optional. if currentUser is not defined, it means the user is Anonymous
-      messages: [],
-      notify: []
+      messages: []
     }
   }
   componentDidMount() {
@@ -31,16 +30,22 @@ class App extends Component {
           this.setState({ messages: serverNewMessageInfo })
           break
         case "incomingNotification":
-          let notification = {
+          let notification = [...this.state.messages, {
             type: "incomingNotification",
+            id: incomingMsg.id,
             oldUser: incomingMsg.oldUser,
             newUser: incomingMsg.newUser
-          }
-
-          this.setState({ notify: notification})
-          console.log(this.state.notify)
+          }]
+          this.setState({ messages: notification })
           break
-
+        case "incomingConnectNotification":
+          let userNotification = [...this.state.messages, {
+            type: incomingMsg.type,
+            id: incomingMsg.id,
+            content: incomingMsg.content
+          }]
+          this.setState({ messages: userNotification})
+          break
       }
     }
   }
@@ -73,9 +78,10 @@ class App extends Component {
       <div>
         <nav className="navbar">
           <a href="/" className="navbar-brand">Chatty</a>
+          <h5>users online</h5>
         </nav>
         <main className="messages">
-          <MessageList meat={this.state.messages} newNotify={this.state.notify} />
+          <MessageList msgs={this.state.messages} />
         </main>
         <footer>
           <ChatBar ali={this.state.currentUser} bubble={this.addNewMsg} userBubble={this.userChanger} />

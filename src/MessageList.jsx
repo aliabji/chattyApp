@@ -9,30 +9,41 @@ class MessageList extends Component {
   render() {
     console.log("Rendering <MessageList/>")
 
-    const inheritMessageProps = this.props.meat
-    const inheritNotificationProps = this.props.newNotify
+    const inheritMessageProps = this.props.msgs
 
-    const submissions = inheritMessageProps.map((message) =>
-      <div className="message" key={message.id}>
-        <span className="message-username">{message.username}</span>
-        <span className="message-content">{message.content}</span>
-      </div>
-    )
+    const submissions = inheritMessageProps.map((message) => {
+      if (message.type === "incomingMessage") {
+        return (
+          <div className="message" key={message.id}>
+            <span className="message-username">{message.username}</span>
+            <span className="message-content">{message.content}</span>
+          </div>
+        )
+      } else if (message.type === "incomingNotification") {
+        return (
+          <div className="message" key={message.id}>
+            <div className="message system">
+              {message.oldUser} changed their username to {message.newUser}
+            </div>
+          </div>
+        )
+      } else if (message.type === "incomingConnectNotification") {
+        return (
+          <div className="message" key={message.id}>
+          <div className="message system">
+            New user connected!
+          </div>
+        </div>
+        )
+      }
+    })
 
-    // const notifications = inheritNotificationProps.map((message) =>
-    //   <div className="message">
-    //     <div className="message system">
-    //       {message.oldUser} changed their username to {message.newUser}
-    //       </div>
-    //   </div>
-    // )
 
     return (
       <div>
         {submissions}
-
       </div>
-    )
+    );
   }
 }
 
