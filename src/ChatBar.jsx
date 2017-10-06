@@ -18,6 +18,7 @@ class ChatBar extends Component {
   handleKeyPress = (evt) => {
     if (evt.key === 'Enter') {
       this.props.bubble(evt.target.value)
+      evt.target.value = ""
     }
   }
 
