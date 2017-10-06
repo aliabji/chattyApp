@@ -12,6 +12,13 @@ class App extends Component {
       size: 0
     }
   }
+
+  scrollToBottom = () => {
+    const node = this.refs.Bottomdiv;
+    node.scrollIntoView({ behavior: "smooth" });
+  }
+
+
   componentDidMount() {
     this.socket = new WebSocket("ws://localhost:3001")
     console.log('Connected to server')
@@ -45,14 +52,19 @@ class App extends Component {
             id: incomingMsg.id,
             content: incomingMsg.content
           }]
-          this.setState({ messages: userNotification})
+          this.setState({ messages: userNotification })
           break
         case "incomingSize":
-        console.log("SIIIIIIIIIZZZZZEEEEEE", incomingMsg.size)
+          console.log("SIIIIIIIIIZZZZZEEEEEE", incomingMsg.size)
           this.setState({ size: incomingMsg.size })
           break
-      } 
+      }
     }
+  }
+
+  //Scrolling down to empty div every time component is mounted.
+  componentDidUpdate() {
+    this.scrollToBottom();
   }
 
   userChanger = (change) => {
@@ -87,6 +99,10 @@ class App extends Component {
         </nav>
         <main className="messages">
           <MessageList msgs={this.state.messages} />
+
+          <div style={{ float: "left", clear: "both" }}
+            ref="Bottomdiv">
+          </div>
         </main>
         <footer>
           <ChatBar ali={this.state.currentUser} bubble={this.addNewMsg} userBubble={this.userChanger} />
