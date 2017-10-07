@@ -10,7 +10,7 @@ A minimal, real-time messaging application allowing simple text communication be
 
 ### Usage
 
-First, clone the server this project relies on by !["clicking here"](https://github.com/aliabji/chattyWebSocket).  Then, install the dependencies in both folders and start both servers.
+First, clone the server this project relies on by ![clicking here](https://github.com/aliabji/chattyWebSocket).  Then, install the dependencies in both folders and start both servers.
 
 ```
 npm i
